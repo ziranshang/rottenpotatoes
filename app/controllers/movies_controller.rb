@@ -9,8 +9,10 @@ class MoviesController < ApplicationController
   def index
 	if params[:sort_by] = "title"
 		#sort by title
+		@title_header = "hilite"
 	elsif params[:sort_by] = "release_date"
 		#sort by date
+		@release_date_header = "hilite"
 	end
 	
 	
