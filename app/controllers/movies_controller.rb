@@ -21,7 +21,7 @@ class MoviesController < ApplicationController
 	
 	
     #@movies = Movie.all
-	@movies = Movie.find(:all, :order)
+	@movies = Movie.find(:all, order)
   end
 
   def new
