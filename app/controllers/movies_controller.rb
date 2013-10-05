@@ -11,14 +11,17 @@ class MoviesController < ApplicationController
 	case sort_selector
 	when "title"
 		#sort by title
+		order = {:order => "title"}
 		@title_header = "hilite"
 	when "release_date"
 		#sort by date
+		order = {:order => "release_date"}
 		@release_date_header = "hilite"
 	end
 	
 	
-    @movies = Movie.all
+    #@movies = Movie.all
+	@movies = Movie.find(:all, :order)
   end
 
   def new
