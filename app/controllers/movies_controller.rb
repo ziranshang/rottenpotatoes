@@ -36,7 +36,6 @@ class MoviesController < ApplicationController
 		session[:ratings] = params[:ratings]
 	end
 
-	Rails.logger.debug "params: #{params[:sort_by].inspect}"
 	@movies = Movie.find_all_by_rating(@checked_ratings.keys, order)
   end
 
