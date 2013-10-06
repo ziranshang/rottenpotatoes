@@ -24,7 +24,9 @@ class MoviesController < ApplicationController
 		@checked_ratings = Hash[@all_ratings.map{|rating| [rating, 1]}]
 	end
 
-	if params[:sort_by] == nil
+	if params[:sort_by] == nil and session[:sort_by] == nil
+		#do nothing
+	elsif params[:sort_by] == nil
 		params[:sort_by] = session[:sort_by]
 		params[:ratings] = session[:ratings]
 		flash.keep
