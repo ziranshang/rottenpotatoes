@@ -7,9 +7,9 @@ class MoviesController < ApplicationController
   end
 
   def index
-	sort_selector = params[:sort_by]
+	sort_selector = params[:sort_by] || session[:sort_by]
 	@all_ratings = Movie.all_ratings
-	@checked_ratings = params[:ratings]
+	@checked_ratings = params[:ratings] || session[:ratings]
 
 	case sort_selector
 	when "title"
@@ -23,7 +23,18 @@ class MoviesController < ApplicationController
 	if @checked_ratings == nil
 		@checked_ratings = Hash[@all_ratings.map{|rating| [rating, 1]}]
 	end
-	Rails.logger.debug "ratings: #{@checked_ratings.inspect}"
+
+	if params[:sort_by] == nil
+		params[:sort_by] = session[:sort_by]
+		params[:ratings] = session[:ratings]
+		flash.keep
+		redirect_to :sort_by => sort_selector, :ratings => @checked_ratings
+	else
+		session[:sort_by] = params[:sort_by]
+		session[:ratings] = params[:ratings]
+	end
+
+	Rails.logger.debug "params: #{params[:sort_by].inspect}"
 	@movies = Movie.find_all_by_rating(@checked_ratings.keys, order)
   end
 
