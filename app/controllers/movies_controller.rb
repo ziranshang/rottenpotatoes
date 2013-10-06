@@ -8,20 +8,18 @@ class MoviesController < ApplicationController
 
   def index
 	sort_selector = params[:sort_by]
+	ratings_selector = params[:ratings]
 	case sort_selector
 	when "title"
-		#sort by title
 		order = {:order => "title"}
 		@title_header = "hilite"
 	when "release_date"
-		#sort by date
 		order = {:order => "release_date"}
 		@release_date_header = "hilite"
 	end
 	
-	
-    #@movies = Movie.all
-	@movies = Movie.find(:all, order)
+
+	@movies = Movie.find(ratings_selector.keys, order)
   end
 
   def new
