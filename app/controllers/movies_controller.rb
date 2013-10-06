@@ -9,6 +9,7 @@ class MoviesController < ApplicationController
   def index
 	sort_selector = params[:sort_by]
 	ratings_selector = params[:ratings]
+	@all_ratings = Movie.all_ratings
 	case sort_selector
 	when "title"
 		order = {:order => "title"}
