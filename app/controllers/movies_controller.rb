@@ -8,8 +8,8 @@ class MoviesController < ApplicationController
 
   def index
 	sort_selector = params[:sort_by]
-	@checked_ratings = params[:ratings]
-	@all_ratings = Movie.all_ratings
+	#@checked_ratings = params[:ratings]
+	#@all_ratings = Movie.all_ratings
 	case sort_selector
 	when "title"
 		order = {:order => "title"}
@@ -19,11 +19,11 @@ class MoviesController < ApplicationController
 		@release_date_header = "hilite"
 	end
 		
-	if @checked_ratings == {}
-		@checked_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
-	end
-
-	@movies = Movie.find_all_by_rating(@checked_ratings.keys, order)
+	#if @checked_ratings == {}
+	#	@checked_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
+	#end
+	@movies = Movie.find(order)
+	#@movies = Movie.find_all_by_rating(@checked_ratings.keys, order)
   end
 
   def new
