@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
 		@checked_ratings = Hash[@all_ratings.map {|rating| [rating, 1]}]
 	end
 
-	@movies = Movie.find(@checked_ratings.keys, order)
+	@movies = Movie.find_all_by_rating(@checked_ratings.keys, order)
   end
 
   def new
