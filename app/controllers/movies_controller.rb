@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
 	end
 
 	if params[:sort_by] == nil and session[:sort_by] == nil
-		do nothing
+		#do nothing
 	elsif params[:sort_by] == nil
 		params[:sort_by] = session[:sort_by]
 		flash.keep
